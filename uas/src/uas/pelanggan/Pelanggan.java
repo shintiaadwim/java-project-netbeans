@@ -7,12 +7,17 @@ public class Pelanggan implements Display {
     private String nama;
     private String telepon;
     private String alamat;
+    private double diskon = 0.0;
 
     public Pelanggan(String id, String nama, String telepon, String alamat) {
         this.id         = id;
         this.nama       = nama;
         this.telepon    = telepon;
         this.alamat     = alamat;
+    }
+    
+    public void setDiskon(double diskon) {
+        this.diskon = diskon;
     }
 
     public String getId() {
@@ -27,6 +32,10 @@ public class Pelanggan implements Display {
     
     public String getTelepon() {
         return telepon;
+    }
+    
+    public double getDiskon() {
+        return diskon; 
     }
 
     @Override
@@ -43,5 +52,12 @@ public class Pelanggan implements Display {
     @Override
     public void printDetail() {
         System.out.println(getInfo());
+    }
+    
+    @Override
+    public String toString() {
+        // Asumsi Anda punya method getId() dan getNama()
+        // Ini akan menghasilkan format: "P001 - Budi"
+        return this.getId() + " - " + this.getNama(); 
     }
 }

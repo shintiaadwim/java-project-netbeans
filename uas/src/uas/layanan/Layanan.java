@@ -43,4 +43,11 @@ public class Layanan implements Display {
     public void printDetail() {
         System.out.println(getInfo());
     }
+    
+    @Override
+    public String toString() {
+        // Asumsi Anda punya method getKodeLayanan() dan getNamaLayanan()
+        // Ini akan menghasilkan format: "L01 - Cuci Kering"
+        return this.getKode() + " - " + this.getNama(); 
+    }
 }

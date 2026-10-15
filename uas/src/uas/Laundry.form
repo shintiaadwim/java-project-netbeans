@@ -27,10 +27,10 @@
               <Component id="jTabbedPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="303" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="356" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -40,8 +40,8 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" min="-2" pref="391" max="-2" attributes="0"/>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="498" max="-2" attributes="0"/>
+              <EmptySpace pref="88" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,31 +71,47 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="no" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="No" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
-                          <Component id="nama" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Nama" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Telp" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
-                          <Component id="telp" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Alamat" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
-                                  <Component id="alamat" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="no" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="No" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="nama" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Nama" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnHapus" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnTambah" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="Alamat" alignment="0" pref="149" max="32767" attributes="0"/>
+                                          <Component id="alamat" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cmbTipeLayananP" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnHapus" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnTambah" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="TipeLayananP" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Telp" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="telp" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Diskon" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="diskon" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="206" max="32767" attributes="0"/>
+                      <EmptySpace pref="310" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -104,28 +120,28 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="no" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telp" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="No" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Telp" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="nama" min="-2" max="-2" attributes="0"/>
+                                      <Component id="no" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="Nama" min="-2" max="-2" attributes="0"/>
+                                      <Component id="No" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="alamat" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                       <Component id="Alamat" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="nama" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TipeLayananP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="Nama" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbTipeLayananP" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -135,7 +151,20 @@
                               <Component id="btnHapus" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="209" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="telp" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Telp" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="diskon" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Diskon" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="264" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -209,6 +238,44 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JLabel" name="diskon">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins SemiBold" size="10" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Diskon :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="Diskon">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DiskonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="TipeLayananP">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Poppins SemiBold" size="10" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Tipe Layanan :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbTipeLayananP">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="2">
+                    <StringItem index="0" value="Reguler"/>
+                    <StringItem index="1" value="VIP"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbTipeLayananPItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbTipeLayananPActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JLayeredPane" name="jLayeredPane2">
@@ -262,7 +329,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="120" max="32767" attributes="0"/>
+                      <EmptySpace pref="224" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -330,7 +397,7 @@
                               <Component id="Harga" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="153" max="32767" attributes="0"/>
+                      <EmptySpace pref="259" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -418,7 +485,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
-                    <StringItem index="0" value="Dasar"/>
+                    <StringItem index="0" value="Reguler"/>
                     <StringItem index="1" value="Setrika"/>
                     <StringItem index="2" value="Express"/>
                   </StringArray>
@@ -483,27 +550,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="202" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="270" max="-2" attributes="0"/>
+                      <EmptySpace pref="139" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="IdTransaksi" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="idTransaksi" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="TglTransaksi" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="tglTransaksi" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cmbDaftarPelanggan" min="-2" pref="150" max="-2" attributes="0"/>
                                   <Component id="namaPelanggan" min="-2" pref="114" max="-2" attributes="0"/>
@@ -511,92 +562,76 @@
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="layananTransaksi" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbDaftarLayanan" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="cmbDaftarLayanan" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="bayar" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="Bayar" min="-2" pref="100" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="kembalian" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="Kembalian" min="-2" pref="100" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="totalBayar" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="TotalBayar" min="-2" pref="100" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="kembalian" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                                  <Component id="totalBayar" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                                  <Component id="bayar" min="-2" pref="87" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Bayar" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="Kembalian" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="TotalBayar" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="bersihTransaksi" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnTampil" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="116" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="namaPelanggan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="layananTransaksi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cmbDaftarPelanggan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbDaftarLayanan" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="IdTransaksi" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tglTransaksi" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="TglTransaksi" min="-2" max="-2" attributes="0"/>
-                                  <Component id="idTransaksi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalBayar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TotalBayar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="namaPelanggan" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="layananTransaksi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bayar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Bayar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cmbDaftarPelanggan" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbDaftarLayanan" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="totalBayar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TotalBayar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="bayar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Bayar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="kembalian" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Kembalian" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="bersihTransaksi" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnTampil" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="kembalian" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Kembalian" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="bersihTransaksi" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnTampil" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="42" max="32767" attributes="0"/>
+                      <EmptySpace pref="209" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -617,32 +652,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="IdTransaksi">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Poppins SemiBold" size="10" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="No Transaksi :"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="idTransaksi">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idTransaksiActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="tglTransaksi">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Poppins SemiBold" size="10" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Tanggal Transaksi :"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="TglTransaksi">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TglTransaksiActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="namaPelanggan">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -653,13 +662,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbDaftarPelanggan">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new DefaultComboBoxModel&lt;Pelanggan&gt;()" type="code"/>
                 </Property>
               </Properties>
               <Events>
@@ -667,7 +671,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbDaftarPelangganActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Pelanggan&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="layananTransaksi">
@@ -680,17 +684,15 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbDaftarLayanan">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new DefaultComboBoxModel&lt;Layanan&gt;()" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbDaftarLayananActionPerformed"/>
+              </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Layanan&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="totalBayar">
@@ -698,7 +700,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins SemiBold" size="10" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Total Bayar :"/>
+                <Property name="text" type="java.lang.String" value="Total Bayar  :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="TotalBayar">
@@ -708,10 +710,13 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins SemiBold" size="10" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Bayar             :"/>
+                <Property name="text" type="java.lang.String" value="Bayar           :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="Bayar">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BayarKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="kembalian">
               <Properties>
@@ -727,6 +732,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bersih"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bersihTransaksiActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnTampil">
               <Properties>

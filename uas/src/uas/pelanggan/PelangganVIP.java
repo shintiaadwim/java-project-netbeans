@@ -1,25 +1,18 @@
 package uas.pelanggan;
 
 public class PelangganVIP extends Pelanggan {
-    private double diskon;
-
-    public PelangganVIP(String id, String nama, String telepon, String alamat, double diskon) {
+    public PelangganVIP(String id, String nama, String telepon, String alamat) {
         super(id, nama, telepon, alamat);
-        this.diskon = diskon;
-    }
-
-    public double getDiskon() {
-        return diskon;
     }
     
-    public double getPelangganVIPDiskon() {
-        return diskon; 
+    public void setDiskon(double diskon) {
+        super.setDiskon(diskon);
     }
 
     @Override
     public String getInfo() {
         return String.format(
-            "Status: VIP | Diskon: %.0f%%", this.diskon * 100
+            "Status: VIP | Diskon: %.0f%%", super.getDiskon() * 100
         );
     }
 

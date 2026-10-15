@@ -3,17 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package uas;
-import uas.display.Display;
+import uas.pelanggan.Pelanggan;
+import uas.pelanggan.PelangganVIP;
 import uas.layanan.Layanan;
 import uas.layanan.LayananSetrika;
 import uas.layanan.LayananExpress;
-import uas.sistem.SistemLaundry;
 import uas.transaksi.Transaksi;
 
 import uas.sistem.SistemLaundry;
-import uas.pelanggan.Pelanggan;
 import javax.swing.JOptionPane;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import uas.transaksi.DetailTransaksi;
 
 
@@ -27,10 +27,41 @@ public class Laundry extends javax.swing.JFrame {
      * Creates new form Laundry
      */
     private SistemLaundry sistem;
+    private double totalHargaAktif = 0.0;
+    private double diskonAktif = 0.0;
     
     public Laundry() {
         initComponents();
+        
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent e) {
+                // Kode ini akan berjalan SETIAP KALI Anda berpindah tab
+
+                int selectedIndex = jTabbedPane1.getSelectedIndex();
+
+                // Periksa tab mana yang baru saja dipilih
+                if (selectedIndex == 0) {
+                    // Anda memilih "tab1" (index 0)
+                    System.out.println("Tab 1 aktif, me-refresh data pelanggan...");
+                    // Panggil method untuk me-refresh data di tab 1 di sini
+                    refreshComboData();
+
+                } else if (selectedIndex == 1) {
+                    // Anda memilih "tab2" (index 1)
+                    System.out.println("Tab 2 aktif, me-refresh data...");
+                    // Panggil method untuk me-refresh data di tab 2 di sini
+                    refreshComboData();
+
+                } else if (selectedIndex == 2) {
+                    // Anda memilih "tab3" (index 2)
+                    System.out.println("Tab 3 aktif, me-refresh data...");
+                    // Panggil method untuk me-refresh data di tab 3 di sini
+                    refreshComboData();
+                }
+            }
+        });
         this.sistem = new SistemLaundry();
+        refreshComboData();
         
         cmbDurasi.setVisible(false);
         TambahHarga.setVisible(false);
@@ -58,6 +89,10 @@ public class Laundry extends javax.swing.JFrame {
         Alamat = new javax.swing.JTextField();
         btnTambah = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
+        diskon = new javax.swing.JLabel();
+        Diskon = new javax.swing.JTextField();
+        TipeLayananP = new javax.swing.JLabel();
+        cmbTipeLayananP = new javax.swing.JComboBox<>();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         kode = new javax.swing.JLabel();
         Kode = new javax.swing.JTextField();
@@ -79,10 +114,6 @@ public class Laundry extends javax.swing.JFrame {
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaStruk = new javax.swing.JTextArea();
-        IdTransaksi = new javax.swing.JLabel();
-        idTransaksi = new javax.swing.JTextField();
-        tglTransaksi = new javax.swing.JLabel();
-        TglTransaksi = new javax.swing.JTextField();
         namaPelanggan = new javax.swing.JLabel();
         cmbDaftarPelanggan = new javax.swing.JComboBox<>();
         layananTransaksi = new javax.swing.JLabel();
@@ -151,6 +182,30 @@ public class Laundry extends javax.swing.JFrame {
             }
         });
 
+        diskon.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
+        diskon.setText("Diskon :");
+
+        Diskon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiskonActionPerformed(evt);
+            }
+        });
+
+        TipeLayananP.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
+        TipeLayananP.setText("Tipe Layanan :");
+
+        cmbTipeLayananP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reguler", "VIP" }));
+        cmbTipeLayananP.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipeLayananPItemStateChanged(evt);
+            }
+        });
+        cmbTipeLayananP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipeLayananPActionPerformed(evt);
+            }
+        });
+
         InputPelanggan.setLayer(no, javax.swing.JLayeredPane.DEFAULT_LAYER);
         InputPelanggan.setLayer(No, javax.swing.JLayeredPane.DEFAULT_LAYER);
         InputPelanggan.setLayer(nama, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -161,6 +216,10 @@ public class Laundry extends javax.swing.JFrame {
         InputPelanggan.setLayer(Alamat, javax.swing.JLayeredPane.DEFAULT_LAYER);
         InputPelanggan.setLayer(btnTambah, javax.swing.JLayeredPane.DEFAULT_LAYER);
         InputPelanggan.setLayer(btnHapus, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        InputPelanggan.setLayer(diskon, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        InputPelanggan.setLayer(Diskon, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        InputPelanggan.setLayer(TipeLayananP, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        InputPelanggan.setLayer(cmbTipeLayananP, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout InputPelangganLayout = new javax.swing.GroupLayout(InputPelanggan);
         InputPelanggan.setLayout(InputPelangganLayout);
@@ -168,54 +227,75 @@ public class Laundry extends javax.swing.JFrame {
             InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InputPelangganLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(no)
-                    .addComponent(No, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nama)
-                    .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Telp, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telp)
+                .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(InputPelangganLayout.createSequentialGroup()
                         .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Alamat, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(alamat))
-                        .addGap(48, 48, 48)
+                            .addComponent(no)
+                            .addComponent(No, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nama)
+                            .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
                         .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnHapus)
-                            .addComponent(btnTambah))))
-                .addContainerGap(206, Short.MAX_VALUE))
+                            .addGroup(InputPelangganLayout.createSequentialGroup()
+                                .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Alamat, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                                    .addComponent(alamat)
+                                    .addComponent(cmbTipeLayananP, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(48, 48, 48)
+                                .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnHapus)
+                                    .addComponent(btnTambah)))
+                            .addComponent(TipeLayananP)))
+                    .addGroup(InputPelangganLayout.createSequentialGroup()
+                        .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Telp, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telp))
+                        .addGap(43, 43, 43)
+                        .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Diskon, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(diskon))
+                        .addGap(121, 121, 121)))
+                .addContainerGap(310, Short.MAX_VALUE))
         );
         InputPelangganLayout.setVerticalGroup(
             InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InputPelangganLayout.createSequentialGroup()
                 .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(InputPelangganLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(no)
-                            .addComponent(telp))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(No, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Telp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(31, 31, 31)
+                        .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(InputPelangganLayout.createSequentialGroup()
-                                .addComponent(nama)
+                                .addComponent(no)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(No, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(InputPelangganLayout.createSequentialGroup()
                                 .addComponent(alamat)
                                 .addGap(12, 12, 12)
-                                .addComponent(Alamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(Alamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nama)
+                            .addComponent(TipeLayananP))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbTipeLayananP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(InputPelangganLayout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(btnTambah)
                         .addGap(18, 18, 18)
                         .addComponent(btnHapus)))
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(InputPelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(InputPelangganLayout.createSequentialGroup()
+                        .addComponent(telp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Telp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(InputPelangganLayout.createSequentialGroup()
+                        .addComponent(diskon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Diskon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab1", InputPelanggan);
@@ -245,7 +325,7 @@ public class Laundry extends javax.swing.JFrame {
         layanan.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
         layanan.setText("Tipe Layanan :");
 
-        cmbTipeLayanan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dasar", "Setrika", "Express" }));
+        cmbTipeLayanan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reguler", "Setrika", "Express" }));
         cmbTipeLayanan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTipeLayananItemStateChanged(evt);
@@ -330,7 +410,7 @@ public class Laundry extends javax.swing.JFrame {
                             .addComponent(jenis, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TambahHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JenisCucianSetrika, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,7 +460,7 @@ public class Laundry extends javax.swing.JFrame {
                         .addComponent(harga)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab2", jLayeredPane2);
@@ -389,28 +469,10 @@ public class Laundry extends javax.swing.JFrame {
         areaStruk.setRows(5);
         jScrollPane1.setViewportView(areaStruk);
 
-        IdTransaksi.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
-        IdTransaksi.setText("No Transaksi :");
-
-        idTransaksi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idTransaksiActionPerformed(evt);
-            }
-        });
-
-        tglTransaksi.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
-        tglTransaksi.setText("Tanggal Transaksi :");
-
-        TglTransaksi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TglTransaksiActionPerformed(evt);
-            }
-        });
-
         namaPelanggan.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
         namaPelanggan.setText("Daftar Pelanggan :");
 
-        cmbDaftarPelanggan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDaftarPelanggan.setModel(new DefaultComboBoxModel<Pelanggan>());
         cmbDaftarPelanggan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbDaftarPelangganItemStateChanged(evt);
@@ -425,18 +487,34 @@ public class Laundry extends javax.swing.JFrame {
         layananTransaksi.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
         layananTransaksi.setText("Daftar Layanan :");
 
-        cmbDaftarLayanan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDaftarLayanan.setModel(new DefaultComboBoxModel<Layanan>());
+        cmbDaftarLayanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDaftarLayananActionPerformed(evt);
+            }
+        });
 
         totalBayar.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
-        totalBayar.setText("Total Bayar :");
+        totalBayar.setText("Total Bayar  :");
 
         bayar.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
-        bayar.setText("Bayar             :");
+        bayar.setText("Bayar           :");
+
+        Bayar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BayarKeyReleased(evt);
+            }
+        });
 
         kembalian.setFont(new java.awt.Font("Poppins SemiBold", 1, 10)); // NOI18N
         kembalian.setText("Kembalian   :");
 
         bersihTransaksi.setText("Bersih");
+        bersihTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bersihTransaksiActionPerformed(evt);
+            }
+        });
 
         btnTampil.setText("Tampil");
         btnTampil.addActionListener(new java.awt.event.ActionListener() {
@@ -446,10 +524,6 @@ public class Laundry extends javax.swing.JFrame {
         });
 
         jLayeredPane3.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(IdTransaksi, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(idTransaksi, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(tglTransaksi, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(TglTransaksi, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(namaPelanggan, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(cmbDaftarPelanggan, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(layananTransaksi, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -468,21 +542,10 @@ public class Laundry extends javax.swing.JFrame {
         jLayeredPane3Layout.setHorizontalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                                .addComponent(IdTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(112, 112, 112))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane3Layout.createSequentialGroup()
-                                .addComponent(idTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)))
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TglTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tglTransaksi)))
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbDaftarPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -493,66 +556,55 @@ public class Laundry extends javax.swing.JFrame {
                             .addComponent(cmbDaftarLayanan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                                .addComponent(bayar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Bayar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                                .addComponent(kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                                .addComponent(totalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TotalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(44, 44, 44)
+                            .addComponent(kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(totalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bayar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Bayar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TotalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(bersihTransaksi)
                             .addComponent(btnTampil))))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(100, 100, 100)
+                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(namaPelanggan)
+                    .addComponent(layananTransaksi))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbDaftarPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDaftarLayanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(IdTransaksi)
-                            .addComponent(tglTransaksi))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TglTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(totalBayar)
+                            .addComponent(TotalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(namaPelanggan)
-                            .addComponent(layananTransaksi))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bayar)
+                            .addComponent(Bayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbDaftarPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbDaftarLayanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(totalBayar)
-                                    .addComponent(TotalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(bayar)
-                                    .addComponent(Bayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(kembalian)
-                                    .addComponent(Kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(bersihTransaksi)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnTampil))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                            .addComponent(kembalian)
+                            .addComponent(Kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(bersihTransaksi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTampil)))
+                .addContainerGap(209, Short.MAX_VALUE))
+            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("tab3", jLayeredPane3);
@@ -564,10 +616,10 @@ public class Laundry extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(303, 303, 303)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(356, 356, 356))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -575,8 +627,8 @@ public class Laundry extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
@@ -589,7 +641,7 @@ public class Laundry extends javax.swing.JFrame {
     private void btnTampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilActionPerformed
         try {
             // 1. Validasi Input
-            if (idTransaksi.getText().isEmpty() || Bayar.getText().isEmpty()) {
+            if (Bayar.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Harap lengkapi data transaksi!", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -597,30 +649,13 @@ public class Laundry extends javax.swing.JFrame {
             // 2. Ambil Data dari GUI
             String noTransaksi = "TRX" + String.format("%04d", sistem.getTransaksiList().size() + 1);
             Date tglTransaksi = new Date();
-            double totalBayar = Double.parseDouble(TotalBayar.getText());
-            double uangBayar = Double.parseDouble(Bayar.getText());
 
-            // 3. Hitung Kembalian
-            if (uangBayar < totalBayar) {
-                JOptionPane.showMessageDialog(this, "Uang pembayaran kurang!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            double kembalian = uangBayar - totalBayar;
-            Kembalian.setText(String.valueOf(kembalian));
-
-            // 4. Ambil Objek Pelanggan & Layanan yang dipilih
-            int idxPelanggan = cmbDaftarPelanggan.getSelectedIndex();
-            int idxLayanan = cmbDaftarLayanan.getSelectedIndex();
-
-            // (Pastikan list tidak kosong)
-            if (idxPelanggan == -1 || idxLayanan == -1) {
-                 JOptionPane.showMessageDialog(this, "Pelanggan/Layanan belum dipilih!");
-                 return;
-            }
-
-            Pelanggan p = sistem.getPelangganList().get(idxPelanggan);
-            Layanan l = sistem.getLayananList().get(idxLayanan);
+            Pelanggan p = (Pelanggan) cmbDaftarPelanggan.getSelectedItem();
+            Layanan l = (Layanan) cmbDaftarLayanan.getSelectedItem();
             DetailTransaksi detail = new DetailTransaksi(l.getHarga(), new Date());
+            double total = this.totalHargaAktif - (this.totalHargaAktif * diskonAktif);
+            String uangBayar = Bayar.getText();
+            String kembalian = Kembalian.getText();
 
             // 5. Buat Objek Transaksi Baru
             // Sesuaikan dengan constructor Transaksi kamu di file Transaksi.java
@@ -631,21 +666,22 @@ public class Laundry extends javax.swing.JFrame {
             // 6. Tampilkan Struk di JTextArea (areaStruk)
             areaStruk.setText(""); // Bersihkan area dulu
             areaStruk.append("====== STRUK ZIEL LAUNDRY ======\n");
-            areaStruk.append("No Transaksi : " + idTransaksi + "\n");
+            areaStruk.append("No Transaksi : " + noTransaksi + "\n");
             areaStruk.append("Tanggal      : " + tglTransaksi + "\n");
-            areaStruk.append("--------------------------------\n");
+            areaStruk.append("------------------------------------------\n");
             areaStruk.append("Pelanggan    : " + p.getNama() + "\n");
             areaStruk.append("No Telp      : " + p.getTelepon() + "\n"); // Asumsi ada getTelepon
-            areaStruk.append("--------------------------------\n");
+            areaStruk.append("------------------------------------------\n");
             areaStruk.append("Layanan      : " + l.getNama() + "\n");
             areaStruk.append("Harga        : Rp " + l.getHarga() + "\n");
+            if(p instanceof PelangganVIP)areaStruk.append("Diskon       : " + p.getDiskon() + "% \n");
 
             // Cek jika LayananExpress (Polimorfisme) untuk detail tambahan
             // (Opsional, jika kamu ingin menampilkan detail khusus)
             // if (l instanceof LayananExpress) ...
 
-            areaStruk.append("--------------------------------\n");
-            areaStruk.append("Total Tagihan: Rp " + totalBayar + "\n");
+            areaStruk.append("------------------------------------------\n");
+            areaStruk.append("Total Tagihan: Rp " + total + "\n");
             areaStruk.append("Dibayar      : Rp " + uangBayar + "\n");
             areaStruk.append("Kembalian    : Rp " + kembalian + "\n");
             areaStruk.append("================================\n");
@@ -685,16 +721,23 @@ public class Laundry extends javax.swing.JFrame {
             String nama = Nama.getText();
             String telp = Telp.getText();
             String alamat = Alamat.getText();
-
+            
             // 2. Validasi sederhana (pastikan tidak kosong)
             if (noPelanggan.isEmpty() || nama.isEmpty() || telp.isEmpty() || alamat.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Semua data harus diisi!", "Error", JOptionPane.ERROR_MESSAGE);
                 return; // Hentikan eksekusi
             }
-
+            
+            Pelanggan pelangganBaru;
             // 3. Buat objek Pelanggan baru
             // (Pastikan constructor di kelas Pelanggan sesuai urutan ini)
-            Pelanggan pelangganBaru = new Pelanggan(noPelanggan, nama, telp, alamat);
+            if("Reguler".equals(cmbTipeLayananP.getSelectedItem().toString())) {
+                pelangganBaru = new Pelanggan(noPelanggan, nama, telp, alamat);
+            } else {
+                double disc = Double.parseDouble(Diskon.getText());
+                pelangganBaru = new PelangganVIP(noPelanggan, nama, telp, alamat);
+                pelangganBaru.setDiskon(disc);
+            }
 
             // 4. Tambahkan pelanggan baru ke SistemLaundry
             // (Saya asumsikan kamu punya method tambahPelanggan di SistemLaundry
@@ -709,6 +752,7 @@ public class Laundry extends javax.swing.JFrame {
             Nama.setText("");
             Telp.setText("");
             Alamat.setText("");
+            Diskon.setText("");
 
         } catch (Exception e) {
             // Tangani jika ada error lain
@@ -747,16 +791,12 @@ public class Laundry extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void TglTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglTransaksiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TglTransaksiActionPerformed
-
     private void btnTambahLayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahLayananActionPerformed
         try {
             // 1. Ambil data umum
             String tipe = cmbTipeLayanan.getSelectedItem().toString();
             String kode = Kode.getText();
-            String nama = Nama.getText();
+            String nama = NamaLayanan.getText();
             // Konversi String ke double/int
             double harga = Double.parseDouble(Harga.getText()); 
             int durasi = Integer.parseInt(cmbDurasi.getSelectedItem().toString()); // Asumsi cmbDurasi berisi angka
@@ -801,10 +841,6 @@ public class Laundry extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTambahLayananActionPerformed
 
-    private void idTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTransaksiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idTransaksiActionPerformed
-
     // Method untuk mengisi ulang ComboBox dengan data terbaru
     private void refreshComboData() {
         // 1. Kosongkan dulu agar tidak duplikat
@@ -813,23 +849,23 @@ public class Laundry extends javax.swing.JFrame {
 
         // 2. Isi ComboBox Pelanggan dari list di SistemLaundry
         // Asumsi: sistem.getPelangganList() mengembalikan ArrayList<Pelanggan>
-        for (int i = 0; i < sistem.getPelangganList().size(); i++) {
+        for (Pelanggan p : sistem.getPelangganList()) {
             // Menampilkan nama pelanggan di dropdown
-            cmbDaftarPelanggan.addItem(sistem.getPelangganList().get(i).getNama());
+            cmbDaftarPelanggan.addItem(p);
         }
 
         // 3. Isi ComboBox Layanan
         // Asumsi: sistem.getLayananList() mengembalikan ArrayList<Layanan>
-        for (int i = 0; i < sistem.getLayananList().size(); i++) {
+        for (Layanan l : sistem.getLayananList()) {
             // Menampilkan nama layanan di dropdown
-            cmbDaftarLayanan.addItem(sistem.getLayananList().get(i).getNama());
+            cmbDaftarLayanan.addItem(l);
         }
     }
     
     private void bersihkanFormLayanan() {
         // Kosongkan semua field input layanan
         Kode.setText("");
-        Nama.setText("");
+        NamaLayanan.setText("");
         Harga.setText("");
         // Jika TambahHarga digunakan
         // TambahHarga.setText(""); 
@@ -878,9 +914,11 @@ public class Laundry extends javax.swing.JFrame {
             
             cmbDurasi.setVisible(false);
             TambahHarga.setVisible(false);
+            JenisCucianSetrika.setVisible(false);
         
-            if (tipeDipilih.equals("Reguler")) {
+            if (tipeDipilih.equals("Dasar")) {
                 // Sembunyikan semua field khusus
+                cmbDurasi.setVisible(true);
             } else if (tipeDipilih.equals("Express")) {
                 // Tampilkan 'Tambah Harga', sembunyikan 'Jenis Kain'
                 cmbDurasi.setVisible(true);
@@ -888,7 +926,7 @@ public class Laundry extends javax.swing.JFrame {
             } else if (tipeDipilih.equals("Setrika")) {
                 // Tampilkan 'Durasi', sembunyikan 'Tambah Harga'
                 cmbDurasi.setVisible(true);
-                TambahHarga.setVisible(true);
+                JenisCucianSetrika.setVisible(true);
             }
         }
     }//GEN-LAST:event_cmbTipeLayananItemStateChanged
@@ -908,6 +946,101 @@ public class Laundry extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cmbDaftarPelangganItemStateChanged
+
+    private void cmbDaftarLayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDaftarLayananActionPerformed
+        // TODO add your handling code here:
+        try {
+            // 1. Ambil objek Layanan yang dipilih
+            Layanan l = (Layanan) cmbDaftarLayanan.getSelectedItem();
+            Pelanggan p = (Pelanggan) cmbDaftarPelanggan.getSelectedItem();
+
+            if (l != null) {
+                // 2. Ambil harganya (sesuaikan nama methodnya, misal getHarga())
+                this.totalHargaAktif = l.getHarga();
+                if(p instanceof PelangganVIP) this.diskonAktif = ((PelangganVIP) p).getDiskon();
+
+                // 3. Tampilkan di JTextField Total Bayar
+                TotalBayar.setText(String.valueOf(this.totalHargaAktif - (this.totalHargaAktif * diskonAktif)));
+            }
+        } catch (Exception e) {
+            // Handle jika objek belum dipilih sempurna, dll.
+            TotalBayar.setText("0");
+            this.totalHargaAktif = 0.0;
+        }
+    }//GEN-LAST:event_cmbDaftarLayananActionPerformed
+
+    private void BayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BayarKeyReleased
+        // TODO add your handling code here:
+        try {
+            // 1. Ambil teks dari field Bayar
+            String strUangBayar = Bayar.getText();
+
+            // 2. Jika field-nya kosong, set kembalian jadi 0
+            if (strUangBayar.isEmpty()) {
+                Kembalian.setText("0");
+                return;
+            }
+
+            // 3. Konversi ke angka
+            double uangBayar = Double.parseDouble(strUangBayar);
+
+            // 4. Ambil total bayar dari variabel yang disimpan di Langkah 1
+            double totalBayar = this.totalHargaAktif;
+            if(diskonAktif != 100.0) {
+                totalBayar -= (totalBayar * diskonAktif);
+            }
+
+            // 5. Hitung kembalian
+            double kembalian = uangBayar - totalBayar;
+
+            // 6. Tampilkan di field Kembalian
+            // (Nama field Anda sudah benar, yaitu "Kembalian")
+            Kembalian.setText(String.valueOf(kembalian));
+
+        } catch (NumberFormatException e) {
+            // Jika user mengetik "abc" atau input tidak valid
+            Kembalian.setText("Input Angka!");
+        } catch (Exception e) {
+            // Error lainnya
+            Kembalian.setText("Error");
+        }
+    }//GEN-LAST:event_BayarKeyReleased
+
+    private void DiskonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiskonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DiskonActionPerformed
+
+    private void cmbTipeLayananPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipeLayananPActionPerformed
+        
+    }//GEN-LAST:event_cmbTipeLayananPActionPerformed
+
+    private void cmbTipeLayananPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipeLayananPItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            String tipeDipilih = cmbTipeLayananP.getSelectedItem().toString();
+            
+            Diskon.setVisible(false);
+            diskon.setVisible(false);
+        
+            if (tipeDipilih.equals("Reguler")) {
+            } else if (tipeDipilih.equals("VIP")) {
+                Diskon.setVisible(true);
+                diskon.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_cmbTipeLayananPItemStateChanged
+
+    private void bersihTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bersihTransaksiActionPerformed
+        // TODO add your handling code here:
+        cmbDaftarPelanggan.setSelectedIndex(-1);
+        cmbDaftarLayanan.setSelectedIndex(-1);
+        areaStruk.setText(""); 
+        TotalBayar.setText(""); 
+        Bayar.setText("");
+        Kembalian.setText("");
+        this.totalHargaAktif = 0.0;
+        this.diskonAktif = 0.0;
+    }//GEN-LAST:event_bersihTransaksiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -947,8 +1080,8 @@ public class Laundry extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Alamat;
     private javax.swing.JTextField Bayar;
+    private javax.swing.JTextField Diskon;
     private javax.swing.JTextField Harga;
-    private javax.swing.JLabel IdTransaksi;
     private javax.swing.JLayeredPane InputPelanggan;
     private javax.swing.JTextField JenisCucianSetrika;
     private javax.swing.JTextField Kembalian;
@@ -958,7 +1091,7 @@ public class Laundry extends javax.swing.JFrame {
     private javax.swing.JTextField No;
     private javax.swing.JTextField TambahHarga;
     private javax.swing.JTextField Telp;
-    private javax.swing.JTextField TglTransaksi;
+    private javax.swing.JLabel TipeLayananP;
     private javax.swing.JTextField TotalBayar;
     private javax.swing.JLabel alamat;
     private javax.swing.JTextArea areaStruk;
@@ -969,14 +1102,15 @@ public class Laundry extends javax.swing.JFrame {
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnTambahLayanan;
     private javax.swing.JButton btnTampil;
-    private javax.swing.JComboBox<String> cmbDaftarLayanan;
-    private javax.swing.JComboBox<String> cmbDaftarPelanggan;
+    private javax.swing.JComboBox<Layanan> cmbDaftarLayanan;
+    private javax.swing.JComboBox<Pelanggan> cmbDaftarPelanggan;
     private javax.swing.JComboBox<String> cmbDurasi;
     private javax.swing.JComboBox<String> cmbTipeLayanan;
+    private javax.swing.JComboBox<String> cmbTipeLayananP;
+    private javax.swing.JLabel diskon;
     private javax.swing.JLabel durasi;
     private javax.swing.JLabel durasiHari;
     private javax.swing.JLabel harga;
-    private javax.swing.JTextField idTransaksi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
@@ -993,7 +1127,6 @@ public class Laundry extends javax.swing.JFrame {
     private javax.swing.JLabel no;
     private javax.swing.JLabel tambahHarga;
     private javax.swing.JLabel telp;
-    private javax.swing.JLabel tglTransaksi;
     private javax.swing.JLabel totalBayar;
     // End of variables declaration//GEN-END:variables
 }

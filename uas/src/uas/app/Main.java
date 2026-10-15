@@ -94,7 +94,8 @@ public class Main {
                 System.out.println("Input diskon tidak valid. Diskon diatur ke 0.0.");
                 diskon = 0.0;
             }
-            p = new PelangganVIP(id, nama, telepon, alamat, diskon);
+            p = new PelangganVIP(id, nama, telepon, alamat);
+            p.setDiskon(diskon);
         } else {
             p = new Pelanggan(id, nama, telepon, alamat);
         }
