@@ -1,0 +1,8 @@
+/build/
+/dist/
+/nbproject/private/
+/nbproject/Makefile-*
+/nbproject/Package-*
+*.class
+*.jar
+hs_err_pid*
